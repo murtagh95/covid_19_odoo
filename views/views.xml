@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- VISTA TIPO ARBOL PARA EL MODELO COVID_19 -->
+        <record model="ir.ui.view" id="covid_19_tree">
+            <field name="name">covid.covid_19.tree</field>
+            <field name="model">covid.covid_19</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"></field>
+                    <field name="date"></field>
+                    <field name="countre_id"></field>
+                    <field name="infected"></field>
+                    <field name="recovered"></field>
+                    <field name="deseaced"></field>
+                </tree>
+            </field>
+        </record>
+
+         <!-- VISTA TIPO FORMULARIO PARA EL MODELO COVID_19 -->
+        <record model="ir.ui.view" id="covid_19_form">
+            <field name="name">covid.covid_19.form</field>
+            <field name="model">covid.covid_19</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group colspan="4" col="4">
+                        <field name="name"></field>
+                        <field name="date"></field>
+                        <field name="countre_id"></field>
+                        <field name="infected"></field>
+                        <field name="recovered"></field>
+                        <field name="deseaced"></field>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="covid_19_action_window">
+            <field name="name">Covid-19</field>
+            <field name="res_model">covid.covid_19</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- ELEMENTOS DEL MENU-->
+        <menuitem name="Covid-19" id="covid_19.menu_root"/>
+        <menuitem name="Covid-19" id="covid_19_menu" parent="covid_19.menu_root" action="covid_19_action_window"/>
+
+
+    </data>
+</odoo>
