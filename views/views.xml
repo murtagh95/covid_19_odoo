@@ -14,6 +14,7 @@
                     <field name="infected"></field>
                     <field name="recovered"></field>
                     <field name="deseaced"></field>
+                    <field name="total_infected"></field>
                 </tree>
             </field>
         </record>
@@ -31,8 +32,50 @@
                         <field name="infected"></field>
                         <field name="recovered"></field>
                         <field name="deseaced"></field>
+                        <field name="total_infected"></field>
+                        <field name="total_deseaced"></field>
+                        <field name="total_recovered"></field>
                     </group>
                 </form>
+            </field>
+        </record>
+
+         <!-- VISTA TIPO CALENDARIO PARA EL MODELO COVID_19 -->
+        <record model="ir.ui.view" id="covid_19_calendar">
+            <field name="name">covid.covid_19_caledar</field>
+            <field name="model">covid.covid_19</field>
+            <field name="arch" type="xml">
+                <calendar string="Covid-19" date_start="date">
+                    <field name="countre_id"/>
+                    <field name="infected"/>
+                </calendar>
+            </field>
+        </record>
+
+         <!-- VISTA TIPO GRAFICO PARA EL MODELO COVID_19 -->
+        <record model="ir.ui.view" id="covid_19_graph">
+            <field name="name">covid.covid_19_graph</field>
+            <field name="model">covid.covid_19</field>
+            <field name="arch" type="xml">
+                <graph string="Cocid-19">
+                    <field name="countre_id"/>
+                    <field name="infected" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+         <!-- VISTA TIPO PIVOT PARA EL MODELO COVID_19 -->
+        <record model="ir.ui.view" id="covid_19_pivot">
+            <field name="name">covid.covid_19_PIVOT</field>
+            <field name="model">covid.covid_19</field>
+            <field name="arch" type="xml">
+                <pivot string="Cocid-19">
+                    <field name="date" type="row"/>
+                    <field name="countre_id" type="row"/>
+                    <field name="infected" type="measure"/>
+                    <field name="recovered" type="measure"/>
+                    <field name="deseaced" type="measure"/>
+                </pivot>
             </field>
         </record>
 
@@ -40,7 +83,7 @@
         <record model="ir.actions.act_window" id="covid_19_action_window">
             <field name="name">Covid-19</field>
             <field name="res_model">covid.covid_19</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,calendar,graph,pivot</field>
         </record>
 
         <!-- ELEMENTOS DEL MENU-->

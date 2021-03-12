@@ -7,8 +7,50 @@ class covid_19(models.Model):
 
     name = fields.Char(string="Fuente", required=True)
     date = fields.Datetime(string="Fecha", required=True, dafault=fields.Datetime.now())
-    countre_id = fields.Many2one("res.country", required=True)
+    countre_id = fields.Many2one("res.country",string="País", required=True)
     infected = fields.Integer(string="Infectados", required=True, default=0)
     recovered = fields.Integer(string="Recuperados", required=True, default=0)
     deseaced = fields.Integer(string="Fallecidos", required=True, default=0)
 
+    total_infected = fields.Integer(stirng="Total Infectados", compute="set_total_infected", required=True,default=0)
+
+    total_recovered = fields.Integer(stirng="Total Recuperados", compute="set_total_recovered", required=True,default=0)
+
+    total_deseaced = fields.Integer(stirng="Total Fallecidos", compute="set_total_deseaced", required=True,default=0)
+
+    def set_total_infected(self):
+        for data in self:
+            # domain es como una clausula WHERE en sql
+            # Busco los que tengan el mismo pais y una fecha inferior
+            domain = [
+                ('countre_id', '=', data.countre_id.id),
+                ('date', '<', data.date)
+            ]
+            # Realizo la busqueda y los registros obtenidos los guardo
+            records = self.search(domain)
+
+            # Extraigo los atributos infected y los guardo en una lista
+            infecteds = records.mapped('infected')
+
+            # Sumo los infectados de los dias anteriores + el actual
+            data.total_infected = sum(infecteds) + data.infected
+
+    def set_total_recovered(self):
+        for data in self:
+            domain = [
+                ('countre_id', '=', data.countre_id.id),
+                ('date', '<', data.date)
+            ]
+            records = self.search(domain)
+            recovereds = records.mapped('recovered')
+            data.total_recovered = sum(recovereds) + data.recovered
+
+    def set_total_deseaced(self):
+        for data in self:
+            domain = [
+                ('countre_id', '=', data.countre_id.id),
+                ('date', '<', data.date)
+            ]
+            records = self.search(domain)
+            deseaceds = records.mapped('deseaced')
+            data.total_deseaced = sum(deseaceds) + data.deseaced
