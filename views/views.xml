@@ -10,7 +10,7 @@
                 <tree>
                     <field name="name"></field>
                     <field name="date"></field>
-                    <field name="countre_id"></field>
+                    <field name="country_id"></field>
                     <field name="infected"></field>
                     <field name="recovered"></field>
                     <field name="deseaced"></field>
@@ -28,7 +28,7 @@
                     <group colspan="4" col="4">
                         <field name="name"></field>
                         <field name="date"></field>
-                        <field name="countre_id"></field>
+                        <field name="country_id"></field>
                         <field name="infected"></field>
                         <field name="recovered"></field>
                         <field name="deseaced"></field>
@@ -46,7 +46,7 @@
             <field name="model">covid.covid_19</field>
             <field name="arch" type="xml">
                 <calendar string="Covid-19" date_start="date">
-                    <field name="countre_id"/>
+                    <field name="country_id"/>
                     <field name="infected"/>
                 </calendar>
             </field>
@@ -58,7 +58,7 @@
             <field name="model">covid.covid_19</field>
             <field name="arch" type="xml">
                 <graph string="Cocid-19">
-                    <field name="countre_id"/>
+                    <field name="country_id"/>
                     <field name="infected" type="measure"/>
                 </graph>
             </field>
@@ -71,7 +71,7 @@
             <field name="arch" type="xml">
                 <pivot string="Cocid-19">
                     <field name="date" type="row"/>
-                    <field name="countre_id" type="row"/>
+                    <field name="country_id" type="row"/>
                     <field name="infected" type="measure"/>
                     <field name="recovered" type="measure"/>
                     <field name="deseaced" type="measure"/>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <data>
+
+        <report id="report_DateReprotExternalayout"
+                string="Reporte entre fechas externo"
+                model="covid_19.date.report.wizard"
+                report_type="qweb-pdf"
+                name="covid_19.datesReportExternalayout"
+                file="covid_19.datesReportExternalayout"
+                menu="False"
+                print_report_name="'Reporte {0} {1} de covid-19'.format(object.date,object.country_id.name)"
+        />
+
+
+        <template id="datesReportExternalayout">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page" style="font-size:18px">
+                        <div class="row">
+
+                            <div class="col-md-12" align="center">
+                                <!-- Encabezado -->
+                                <h2>Reporte Covid-19</h2>
+                                <h4>De: <t t-esc="start_date"></t> Hasta: <t t-esc="end_date"></t> </h4>
+                                <h4>Se muestran <t t-esc="country_ids"></t> país/es </h4>
+
+                                <table class="table mt-16">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Fuente</th>
+                                            <th scope="col">Pais</th>
+                                            <th scope="col">Infectados</th>
+                                            <th scope="col">Recuperados</th>
+                                            <th scope="col">Fallecidos</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <t t-foreach="covidRecords" t-as="record">
+                                            <tr>
+                                                <th> <t t-esc="record['name']" /> </th>
+                                                <th> <t t-esc="record['date']" /> </th>
+                                                <th> <t t-esc="record['country_id']" /> </th>
+                                                <th> <t t-esc="record['infected']" /> </th>
+                                                <th> <t t-esc="record['recovered']" /> </th>
+                                                <th> <t t-esc="record['deseaced']" /> </th>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+</odoo>

@@ -11,7 +11,10 @@
     'data': [
         'views/views.xml',
         'views/template.xml',
-        'data/data.xml'
+        'data/data.xml',
+        'reports/daily_external_layout.xml',
+        'reports/dates_external_layout.xml',
+        'wizard/date_report.xml'
     ],
     'demo': [
         'demo/demo.xml',

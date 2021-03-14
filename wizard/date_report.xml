@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_date_report_wizard">
+            <field name="name">Reprote entre fechas</field>
+            <field name="model">covid_19.date.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="invoiced sales order">
+                    <p class="oe_grey">
+                        Genera un reporte en PDF entre un rango de fechas y un país. Si no selecciona un país,
+                        se imprimiran todos
+                    </p>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+
+                    <separator string="Paises"/>
+                    <field name="country_ids"/>
+                    <footer>
+                        <!-- En el atributo de name del boton debemos colocar el nombre del método que
+                            generara la el POF-->
+                        <button
+                                name="print_report"
+                                string="Imprimir reporte"
+                                type="object" class="btn-primary" />
+                        <button
+                                string="Cancelar"
+                                class="btn-secondary"
+                                special="cancel" />
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_date_report_wizard">
+            <field name="name">Reporte entre fechas</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">covid_19.date.report.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+                name="Reporte entre fechas"
+                id="date_report_wizard_menu"
+                parent="covid_19.menu_root"
+                action="action_view_date_report_wizard" />
+
+    </data>
+</odoo>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <data>
+
+        <report id="covid_19_daily_externa_layout_report"
+                string="Reporte diario externo"
+                model="covid.covid_19"
+                report_type="qweb-html"
+                name="covid_19.daily_externa_layout_report"
+                menu="True"
+                print_report_name="'Reporte {0} {1} de covid-19'.format(object.date,object.country_id.name)"
+        />
+
+        <template id="daily_externa_layout_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="obj">
+                    <div class="page" style="font-size:18px">
+                        <div class="row">
+                            <div class="col-ml-12" align="center">
+                                <h1>Reporte diario Covid-19 <span t-field="obj.date"/> </h1>
+                                <h2>Versión registro manual</h2>
+                                <h4>Fuente <span t-field="obj.name"/> </h4>
+                                <h4>País <span t-field="obj.country_id"/> </h4>
+                            </div>
+                        </div>
+
+                        <div class="row mt8">
+                            <div class="col-md-12">
+                                <strong>Infectados: </strong>
+                                <span t-field="obj.infected"/>
+                                <span style="margin-left:10rem" t-esc="obj.set_porcentage_infected()"/> %
+                            </div>
+                        </div>
+
+                        <div class="row mt8">
+                            <div class="col-md-12">
+                                <strong>Recuperados: </strong>
+                                <span t-field="obj.recovered"/>
+                                <span style="margin-left:10rem" t-esc="obj.set_porcentage_recovered()"/> %
+                            </div>
+                        </div>
+
+                        <div class="row mt8">
+                            <div class="col-md-12">
+                                <strong>Muertos: </strong>
+                                <span t-field="obj.deseaced"/>
+                                <span style="margin-left:10rem" t-esc="obj.set_porcentage_deseaced()"/> %
+                            </div>
+                        </div>
+
+                        <div class="row mt8">
+                            <div class="col-md-12" align="center">
+                                <strong>total acumulado hasta la fecha de registros</strong>
+                            </div>
+                        </div>
+
+                        <div class="row mt8">
+                            <div class="col-md-12">
+                                <strong>Infectados: </strong>
+                                <span t-field="obj.total_infected"/>
+                            </div>
+                        </div>
+
+                        <div class="row mt8">
+                            <div class="col-md-12">
+                                <strong>Recuperados: </strong>
+                                <span t-field="obj.total_recovered"/>
+                            </div>
+                        </div>
+
+                        <div class="row mt8">
+                            <div class="col-md-12">
+                                <strong>Muertos: </strong>
+                                <span t-field ="obj.total_deseaced"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+</odoo>
